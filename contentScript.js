@@ -28,13 +28,13 @@
 
         if (!bookmarkBtnExists) {
 
-            waitForElement(".ytp-left-controls", (leftControls) => {
+            waitForElement(".ytp-right-controls", (leftControls) => {
                 const bookmarkBtn = document.createElement("img");
                 bookmarkBtn.src = chrome.runtime.getURL("assets/bookmark.png");
                 bookmarkBtn.className = "ytp-button bookmark-btn";
                 bookmarkBtn.title = "Click to bookmark current timestamp";
 
-                leftControls.append(bookmarkBtn);
+                leftControls.insertBefore(bookmarkBtn, leftControls.children[1] || null);
                 console.log("Bookmark button appended successfully zaza.");
 
                 // bookmarkBtn.addEventListener("click", addNewBookmarkEventHandler);
