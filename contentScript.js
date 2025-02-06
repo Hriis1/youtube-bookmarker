@@ -8,13 +8,14 @@
 
         if (type === "NEW") {
             currentVideo = videoId;
-            newVideoLoaded();
+            console.log("Video id:" + currentVideo );
+            //newVideoLoaded();
         }
     });
 
     const newVideoLoaded = () => {
         const bookmarkBtnExists = document.getElementsByClassName("bookmark-btn")[0];
-        console.log(bookmarkBtnExists);
+        //console.log(bookmarkBtnExists);
 
         if (!bookmarkBtnExists) {
             const bookmarkBtn = document.createElement("img");
@@ -44,7 +45,7 @@
         });
     }
 
-    newVideoLoaded();
+    //newVideoLoaded();
 })();
 
 const getTime = t => {
