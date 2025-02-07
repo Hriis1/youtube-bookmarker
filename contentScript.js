@@ -31,9 +31,14 @@
         }, 300); // checks every 300ms
     }
 
-    function newVideoLoaded() {
-        const bookmarkBtnExists = document.getElementsByClassName("bookmark-btn")[0];
+    async function newVideoLoaded() {
 
+        //Get the stored bookmarks
+        currentVideoBookmarks = await fetchBookmarks();
+        console.log("Video Bookmarks: ");
+        console.log(currentVideoBookmarks);
+
+        const bookmarkBtnExists = document.getElementsByClassName("bookmark-btn")[0];
         if (!bookmarkBtnExists) {
 
             //Get the right controls when they load
