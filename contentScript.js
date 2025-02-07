@@ -28,8 +28,8 @@
 
         if (!bookmarkBtnExists) {
 
+            //Get the right controls when they load
             waitForElement(".ytp-right-controls", (rightControls) => {
-                // Assign the element to the outer variable for future use.
                 youtuberightControls = rightControls;
 
                 //Insert the new button
@@ -38,11 +38,19 @@
                 bookmarkBtn.className = "ytp-button bookmark-btn";
                 bookmarkBtn.title = "Click to bookmark current timestamp";
                 rightControls.insertBefore(bookmarkBtn, rightControls.children[1] || null);
-                console.log("Bookmark button appended successfully zaza.");
+                bookmarkBtn.addEventListener("click", addNewBookmarkEventHandler);
+            });
 
-                // bookmarkBtn.addEventListener("click", addNewBookmarkEventHandler);
+            //Get the yt player when it loads
+            waitForElement(".video-stream", (ytPlayer) => {
+                youtubePlayer = ytPlayer;
+
             });
         }
+    }
+
+    function addNewBookmarkEventHandler() {
+        console.log("video time in secs: " + youtubePlayer.currentTime);
     }
 
 })();
