@@ -13,6 +13,10 @@
         }
     });
 
+    function fetchBookMarks() {
+
+    }
+
     function waitForElement(selector, callback) {
         const interval = setInterval(() => {
             const element = document.querySelector(selector);
@@ -50,13 +54,23 @@
     }
 
     function addNewBookmarkEventHandler() {
+        //Create the bookmark
         const vidTime = youtubePlayer.currentTime;
         const newBookMark = {
             time: vidTime,
             desc: "Book mark at: " + secsToTime(vidTime)
         }
 
-        console.log(newBookMark);
+        //Push and sort the array
+        currentVideoBookmarks.push(newBookMark);
+        currentVideoBookmarks.sort((a, b) => a.time - b.time);
+
+        //Store to chrome storage
+        chrome.storage.sync.set({
+            [currentVideo]: JSON.stringify(currentVideoBookmarks)
+        });
+
+        console.log("Bookmarks stored successfully :)");
     }
 
     function secsToTime(time) {
