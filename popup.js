@@ -11,4 +11,16 @@ const onDelete = e => {};
 
 const setBookmarkAttributes =  () => {};
 
-document.addEventListener("DOMContentLoaded", () => {});
+document.addEventListener("DOMContentLoaded", async () => {
+
+    //Get the tab and vid
+    const activeTab = await getCurrentTab();
+    const queryParameters = activeTab.url.split("?")[1];
+    const urlParameters = new URLSearchParams(queryParameters);
+    const currVid = urlParameters.get("v");
+
+    if(activeTab.url.includes("youtube.com/watch") && currVid) //if tab is a youtube video
+    {
+
+    }
+});
