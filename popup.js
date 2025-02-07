@@ -51,9 +51,22 @@ async function onPlay(e) {
     });
 }
 
-function onDelete(e) {
+async function onDelete(e) {
+    //Get the time and active tab and the element we want to delete
+    const vidTime = e.target.parentNode.parentNode.getAttribute("timestamp");
+    const activeTab = await getCurrentTab();
+    const bookmarkElementToDelete = document.getElementById("bookmark-" + vidTime);
 
+    //Delete the element
+    bookmarkElementToDelete.parentNode.removeChild(bookmarkElementToDelete);
+
+    //Send a delete command and refresh the bookmarks
+    chrome.tabs.sendMessage(activeTab.id, {
+        type: "DELETE",
+        value: vidTime,
+    }, viewBookmarks);
 }
+
 function addBookmarkBtn(srcImg, onClickFunc, parentElement) {
     //Create the btn and set attributes
     const controlElement = document.createElement("img");

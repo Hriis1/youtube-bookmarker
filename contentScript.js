@@ -12,6 +12,15 @@
             newVideoLoaded();
         } else if (type === "PLAY") {
             youtubePlayer.currentTime = value;
+        } else if (type === "DELETE") {
+            
+            //Filter
+            currentVideoBookmarks = currentVideoBookmarks.filter((el) => el.time != value);
+
+            //Store to chrome storage
+            chrome.storage.sync.set({
+                [currentVideo]: JSON.stringify(currentVideoBookmarks)
+            });
         }
     });
 
