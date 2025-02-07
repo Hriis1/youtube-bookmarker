@@ -1,5 +1,4 @@
 import { getCurrentTab, fetchBookmarks } from "./utils.js";
-
 // adding a new bookmark row to the popup
 function addNewBookmark(container, bookmark) {
     //Create the elements
@@ -40,10 +39,21 @@ function viewBookmarks(vidBookmarks) {
 
 }
 
-const onPlay = e => { };
+async function onPlay(e) {
+    //Get the time and active tab
+    const vidTime = e.target.parentNode.parentNode.getAttribute("timestamp");
+    const activeTab = await getCurrentTab();
 
-const onDelete = e => { };
+    //Send a play command
+    chrome.tabs.sendMessage(activeTab.id, {
+        type: "PLAY",
+        value: vidTime,
+    });
+}
 
+function onDelete(e) {
+
+}
 function addBookmarkBtn(srcImg, onClickFunc, parentElement) {
     //Create the btn and set attributes
     const controlElement = document.createElement("img");
@@ -58,7 +68,6 @@ function addBookmarkBtn(srcImg, onClickFunc, parentElement) {
 };
 
 document.addEventListener("DOMContentLoaded", async () => {
-
     //Get the tab and vid
     const activeTab = await getCurrentTab();
     const queryParameters = activeTab.url.split("?")[1];

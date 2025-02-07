@@ -10,6 +10,8 @@
             currentVideo = videoId;
             console.log("Video id:" + currentVideo);
             newVideoLoaded();
+        } else if (type === "PLAY") {
+            youtubePlayer.currentTime = value;
         }
     });
 
