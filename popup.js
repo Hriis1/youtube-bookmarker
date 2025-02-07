@@ -4,17 +4,25 @@ import { getCurrentTab, fetchBookmarks } from "./utils.js";
 function addNewBookmark(container, bookmark) {
     //Create the elements
     const bookmarkTitleElement = document.createElement("div");
+    const buttonsContainer = document.createElement("div");
     const newBookmarkElement = document.createElement("div");
+
 
     //Set the title
     bookmarkTitleElement.textContent = bookmark.desc;
     bookmarkTitleElement.className = "bookmark-title";
 
-    //Set the bookmark element as a while
+    //Set up the buttons
+    buttonsContainer.className = "bookmark-controls";
+    addBookmarkBtn("play", onPlay, buttonsContainer);
+    addBookmarkBtn("delete", onDelete, buttonsContainer);
+
+    //Set up the bookmark element
     newBookmarkElement.id = "bookmark-" + bookmark.time;
     newBookmarkElement.className = "bookmark";
     newBookmarkElement.setAttribute("timestamp", bookmark.time);
     newBookmarkElement.appendChild(bookmarkTitleElement);
+    newBookmarkElement.appendChild(buttonsContainer);
 
     //Append the new element to the container
     container.appendChild(newBookmarkElement);
@@ -37,12 +45,15 @@ const onPlay = e => { };
 const onDelete = e => { };
 
 function addBookmarkBtn(srcImg, onClickFunc, parentElement) {
+    //Create the btn and set attributes
     const controlElement = document.createElement("img");
     controlElement.src = "assets/" + srcImg + ".png";
     controlElement.title = srcImg;
-    
+
+    //Set the on click
     controlElement.addEventListener("click", onClickFunc);
 
+    //Append to parent
     parentElement.appendChild(controlElement);
 };
 
