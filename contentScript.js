@@ -50,7 +50,26 @@
     }
 
     function addNewBookmarkEventHandler() {
-        console.log("video time in secs: " + youtubePlayer.currentTime);
+        const vidTime = youtubePlayer.currentTime;
+        const newBookMark = {
+            time: vidTime,
+            desc: "Book mark at: " + secsToTime(vidTime)
+        }
+
+        console.log(newBookMark);
     }
 
+    function secsToTime(time) {
+        const hrs = Math.floor(time / 3600);
+        let mins = Math.floor((time % 3600) / 60);
+        const secs = String(Math.floor(time % 60)).padStart(2, '0');
+
+        if (hrs > 0) {
+            //Pad mins if there is an hour
+            mins = String(mins).padStart(2, '0');
+            return `${hrs}:${mins}:${secs}`;
+        } else {
+            return `${mins}:${secs}`;
+        }
+    }
 })();
