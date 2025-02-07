@@ -1,5 +1,5 @@
 (() => {
-    let youtubeLeftControls, youtubePlayer;
+    let youtuberightControls, youtubePlayer;
     let currentVideo = "";
     let currentVideoBookmarks = [];
 
@@ -28,13 +28,16 @@
 
         if (!bookmarkBtnExists) {
 
-            waitForElement(".ytp-right-controls", (leftControls) => {
+            waitForElement(".ytp-right-controls", (rightControls) => {
+                // Assign the element to the outer variable for future use.
+                youtuberightControls = rightControls;
+
+                //Insert the new button
                 const bookmarkBtn = document.createElement("img");
                 bookmarkBtn.src = chrome.runtime.getURL("assets/bookmark.png");
                 bookmarkBtn.className = "ytp-button bookmark-btn";
                 bookmarkBtn.title = "Click to bookmark current timestamp";
-
-                leftControls.insertBefore(bookmarkBtn, leftControls.children[1] || null);
+                rightControls.insertBefore(bookmarkBtn, rightControls.children[1] || null);
                 console.log("Bookmark button appended successfully zaza.");
 
                 // bookmarkBtn.addEventListener("click", addNewBookmarkEventHandler);

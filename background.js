@@ -8,11 +8,11 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
       type: "NEW",
       videoId: urlParameters.get("v"),
     })
-    .then(() => {
-      console.log("Message sent successfully to tab:", tabId);
-    })
-    .catch(err => {
-      console.error("Message failed to send:", err);
-    });
+      .then(() => {
+        console.log("Message sent successfully to tab:", tabId);
+      })
+      .catch(err => {
+        console.error("Message failed to send:", err);
+      });
   }
 });
