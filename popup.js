@@ -2,17 +2,21 @@ import { getCurrentTab, fetchBookmarks } from "./utils.js";
 
 // adding a new bookmark row to the popup
 function addNewBookmark(container, bookmark) {
+    //Create the elements
     const bookmarkTitleElement = document.createElement("div");
     const newBookmarkElement = document.createElement("div");
 
+    //Set the title
     bookmarkTitleElement.textContent = bookmark.desc;
     bookmarkTitleElement.className = "bookmark-title";
 
+    //Set the bookmark element as a while
     newBookmarkElement.id = "bookmark-" + bookmark.time;
     newBookmarkElement.className = "bookmark";
     newBookmarkElement.setAttribute("timestamp", bookmark.time);
     newBookmarkElement.appendChild(bookmarkTitleElement);
 
+    //Append the new element to the container
     container.appendChild(newBookmarkElement);
 }
 
@@ -32,7 +36,15 @@ const onPlay = e => { };
 
 const onDelete = e => { };
 
-const setBookmarkAttributes = () => { };
+function addBookmarkBtn(srcImg, onClickFunc, parentElement) {
+    const controlElement = document.createElement("img");
+    controlElement.src = "assets/" + srcImg + ".png";
+    controlElement.title = srcImg;
+    
+    controlElement.addEventListener("click", onClickFunc);
+
+    parentElement.appendChild(controlElement);
+};
 
 document.addEventListener("DOMContentLoaded", async () => {
 
