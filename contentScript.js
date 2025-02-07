@@ -79,7 +79,26 @@
     function addNewBookmarkEventHandler() {
         //Get the time
         const vidTime = youtubePlayer.currentTime;
-        if (!currentVideoBookmarks.includes(vidTime)) {
+
+        //Find if time exists using binary search
+        let left = 0;
+        let right = currentVideoBookmarks.length - 1;
+        let exists = false;
+        while (left <= right) {
+            const mid = Math.floor((left + right) / 2);
+            const midTime = currentVideoBookmarks[mid].time;
+
+            if (midTime === vidTime) {
+                exists = true;
+                break;
+            } else if (midTime < vidTime) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+
+        if (!exists) { //if time doesnt exist
             //Create the bookmark
             const newBookMark = {
                 time: vidTime,
@@ -95,7 +114,7 @@
                 [currentVideo]: JSON.stringify(currentVideoBookmarks)
             });
 
-            console.log("Bookmarks stored successfully :)");
+            console.log("Bookmarks stored successfully :))))");
         } else {
             console.log("Bookmark already exists :)");
         }
