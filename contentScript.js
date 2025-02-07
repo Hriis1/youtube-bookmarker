@@ -13,8 +13,12 @@
         }
     });
 
-    function fetchBookMarks() {
-
+    function fetchBookmarks() {
+        return new Promise((resolve) => {
+            chrome.storage.sync.get([currentVideo], (obj) => {
+                resolve(obj[currentVideo] ? JSON.parse(obj[currentVideo]) : []);
+            });
+        });
     }
 
     function waitForElement(selector, callback) {
