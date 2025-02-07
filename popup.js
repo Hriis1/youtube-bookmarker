@@ -1,9 +1,32 @@
 import { getCurrentTab, fetchBookmarks } from "./utils.js";
 
 // adding a new bookmark row to the popup
-const addNewBookmark = () => { };
+function addNewBookmark(container, bookmark) {
+    const bookmarkTitleElement = document.createElement("div");
+    const newBookmarkElement = document.createElement("div");
 
-const viewBookmarks = () => { };
+    bookmarkTitleElement.textContent = bookmark.desc;
+    bookmarkTitleElement.className = "bookmark-title";
+
+    newBookmarkElement.id = "bookmark-" + bookmark.time;
+    newBookmarkElement.className = "bookmark";
+    newBookmarkElement.setAttribute("timestamp", bookmark.time);
+    newBookmarkElement.appendChild(bookmarkTitleElement);
+
+    container.appendChild(newBookmarkElement);
+}
+
+//Show the user their bookmarks
+function viewBookmarks(vidBookmarks) {
+    const container = document.querySelector("#popup-container");
+    const bookmarksContainer = container.querySelector("#bookmarks");
+    bookmarksContainer.innerHTML = "";
+
+    for (let i = 0; i < vidBookmarks.length; i++) {
+        addNewBookmark(bookmarksContainer, vidBookmarks[i]);
+    }
+
+}
 
 const onPlay = e => { };
 
@@ -21,9 +44,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     if (activeTab.url.includes("youtube.com/watch") && currVidID) { //if tab is a youtube video
         const vidBookMarks = await fetchBookmarks(currVidID);
-        console.log("YT VID YT VID");
+        viewBookmarks(vidBookMarks);
     }
-    else {
+    else { //if tab is not a youtube video
         const container = document.querySelector("#popup-container");
         container.querySelector(".title").textContent = "This is not a youtube video :)";
         container.querySelector("#bookmarks").innerHTML = "";

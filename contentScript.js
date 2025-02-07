@@ -67,7 +67,7 @@
         const vidTime = youtubePlayer.currentTime;
         const newBookMark = {
             time: vidTime,
-            desc: "Book mark at: " + secsToTime(vidTime)
+            desc: "Bookmark at: " + secsToTime(vidTime)
         }
 
         //Push and sort the array
