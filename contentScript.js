@@ -77,23 +77,28 @@
     }
 
     function addNewBookmarkEventHandler() {
-        //Create the bookmark
+        //Get the time
         const vidTime = youtubePlayer.currentTime;
-        const newBookMark = {
-            time: vidTime,
-            desc: "Bookmark at: " + secsToTime(vidTime)
+        if (!currentVideoBookmarks.includes(vidTime)) {
+            //Create the bookmark
+            const newBookMark = {
+                time: vidTime,
+                desc: "Bookmark at: " + secsToTime(vidTime)
+            }
+
+            //Push and sort the array
+            currentVideoBookmarks.push(newBookMark);
+            currentVideoBookmarks.sort((a, b) => a.time - b.time);
+
+            //Store to chrome storage
+            chrome.storage.sync.set({
+                [currentVideo]: JSON.stringify(currentVideoBookmarks)
+            });
+
+            console.log("Bookmarks stored successfully :)");
+        } else {
+            console.log("Bookmark already exists :)");
         }
-
-        //Push and sort the array
-        currentVideoBookmarks.push(newBookMark);
-        currentVideoBookmarks.sort((a, b) => a.time - b.time);
-
-        //Store to chrome storage
-        chrome.storage.sync.set({
-            [currentVideo]: JSON.stringify(currentVideoBookmarks)
-        });
-
-        console.log("Bookmarks stored successfully :)");
     }
 
     function secsToTime(time) {
