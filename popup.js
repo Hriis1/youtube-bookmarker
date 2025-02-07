@@ -1,15 +1,15 @@
 import { getCurrentTab } from "./utils";
 
 // adding a new bookmark row to the popup
-const addNewBookmark = () => {};
+const addNewBookmark = () => { };
 
-const viewBookmarks = () => {};
+const viewBookmarks = () => { };
 
-const onPlay = e => {};
+const onPlay = e => { };
 
-const onDelete = e => {};
+const onDelete = e => { };
 
-const setBookmarkAttributes =  () => {};
+const setBookmarkAttributes = () => { };
 
 document.addEventListener("DOMContentLoaded", async () => {
 
@@ -19,8 +19,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     const urlParameters = new URLSearchParams(queryParameters);
     const currVid = urlParameters.get("v");
 
-    if(activeTab.url.includes("youtube.com/watch") && currVid) //if tab is a youtube video
+    if (activeTab.url.includes("youtube.com/watch") && currVid) //if tab is a youtube video
     {
-
+        console.log("YT VID YT VID");
+    }
+    else {
+        console.log("NO NO NO NO NO VID");
     }
 });
