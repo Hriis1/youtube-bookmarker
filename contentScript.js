@@ -13,10 +13,10 @@
         }
     });
 
-    function fetchBookmarks() {
+    function fetchBookmarks(currentVideoID) {
         return new Promise((resolve) => {
-            chrome.storage.sync.get([currentVideo], (obj) => {
-                resolve(obj[currentVideo] ? JSON.parse(obj[currentVideo]) : []);
+            chrome.storage.sync.get([currentVideoID], (obj) => {
+                resolve(obj[currentVideoID] ? JSON.parse(obj[currentVideoID]) : []);
             });
         });
     }
@@ -34,7 +34,7 @@
     async function newVideoLoaded() {
 
         //Get the stored bookmarks
-        currentVideoBookmarks = await fetchBookmarks();
+        currentVideoBookmarks = await fetchBookmarks(currentVideo);
         console.log("Video Bookmarks: ");
         console.log(currentVideoBookmarks);
 

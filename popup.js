@@ -1,4 +1,4 @@
-import { getCurrentTab } from "./utils";
+import { getCurrentTab, fetchBookmarks } from "./utils.js";
 
 // adding a new bookmark row to the popup
 const addNewBookmark = () => { };
@@ -17,13 +17,15 @@ document.addEventListener("DOMContentLoaded", async () => {
     const activeTab = await getCurrentTab();
     const queryParameters = activeTab.url.split("?")[1];
     const urlParameters = new URLSearchParams(queryParameters);
-    const currVid = urlParameters.get("v");
+    const currVidID = urlParameters.get("v");
 
-    if (activeTab.url.includes("youtube.com/watch") && currVid) //if tab is a youtube video
-    {
+    if (activeTab.url.includes("youtube.com/watch") && currVidID) { //if tab is a youtube video
+        const vidBookMarks = await fetchBookmarks(currVidID);
         console.log("YT VID YT VID");
     }
     else {
-        console.log("NO NO NO NO NO VID");
+        const container = document.querySelector("#popup-container");
+        container.querySelector(".title").textContent = "This is not a youtube video :)";
+        container.querySelector("#bookmarks").innerHTML = "";
     }
 });
